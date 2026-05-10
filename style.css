@@ -16,18 +16,36 @@ body{
     overflow:hidden;
 }
 
-/* GRID (FIXED LAYER ISSUE) */
+/* ========================= */
+/* ANIMATED GRID BACKGROUND */
+/* ========================= */
+
+@keyframes gridMove {
+    0% {
+        background-position: 0 0, 0 0;
+    }
+    50% {
+        background-position: 20px -20px, -20px 20px;
+    }
+    100% {
+        background-position: 0 0, 0 0;
+    }
+}
 
 .grid-bg{
     position:absolute;
     inset:0;
+
     background:
         linear-gradient(rgba(168,85,247,0.06) 1px, transparent 1px),
         linear-gradient(90deg, rgba(168,85,247,0.06) 1px, transparent 1px);
+
     background-size:40px 40px;
 
+    animation: gridMove 30s ease-in-out infinite;
+
     z-index:0;
-    pointer-events:none; /* 🔥 IMPORTANT FIX */
+    pointer-events:none;
 }
 
 /* TOP ICONS */
@@ -62,7 +80,7 @@ body{
     filter: drop-shadow(0 0 10px #a855f7);
 }
 
-/* CARD (FIXED STACK ORDER) */
+/* CARD */
 
 .card{
     width:1500px;
@@ -86,7 +104,7 @@ body{
         0 0 25px rgba(168,85,247,0.12);
 
     position:relative;
-    z-index:2; /* 🔥 FIX CLICK LAYER */
+    z-index:2;
 }
 
 /* AVATAR */
@@ -177,9 +195,7 @@ h1{
     line-height:1.5;
 }
 
-/* ========================= */
-/* BUTTON FIXED (REAL CLICK + PURPLE) */
-/* ========================= */
+/* BUTTONS */
 
 .actions{
     display:flex;
@@ -212,7 +228,6 @@ h1{
     box-shadow:0 0 12px rgba(168,85,247,0.1);
 }
 
-/* 🔥 STRONG PURPLE HOVER (FIXED VISIBILITY) */
 .btn:hover{
     transform:translateY(-3px);
 
@@ -226,7 +241,6 @@ h1{
         0 0 10px rgba(168,85,247,0.25);
 }
 
-/* CLICK FEEDBACK */
 .btn:active{
     transform:translateY(0px) scale(0.97);
     box-shadow:0 0 8px rgba(168,85,247,0.25);
