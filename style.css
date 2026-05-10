@@ -17,35 +17,56 @@ body{
 }
 
 /* ========================= */
-/* ANIMATED GRID BACKGROUND */
+/* COLOR SHIFTING GRID (SMOOTH) */
 /* ========================= */
-
-@keyframes gridMove {
-    0% {
-        background-position: 0 0, 0 0;
-    }
-    50% {
-        background-position: 20px -20px, -20px 20px;
-    }
-    100% {
-        background-position: 0 0, 0 0;
-    }
-}
 
 .grid-bg{
     position:absolute;
     inset:0;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+
+    animation: hueShift 10s linear infinite;
+}
+
+/* moving grid layer */
+.grid-bg::before{
+    content:"";
+    position:absolute;
+    inset:0;
 
     background:
-        linear-gradient(rgba(168,85,247,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(168,85,247,0.06) 1px, transparent 1px);
+        linear-gradient(rgba(168,85,247,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168,85,247,0.08) 1px, transparent 1px);
 
     background-size:40px 40px;
 
-    animation: gridMove 30s ease-in-out infinite;
+    animation:
+        gridMove 1s linear infinite;
 
-    z-index:0;
-    pointer-events:none;
+    will-change: transform;
+    transform: translateZ(0);
+
+    opacity:1;
+}
+
+/* smooth movement */
+@keyframes gridMove {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(40px, 40px, 0);
+    }
+}
+
+/* 🌈 COLOR SHIFT (LILA → BLAU → ROT) */
+@keyframes hueShift {
+    0%   { filter: hue-rotate(0deg); }
+    33%  { filter: hue-rotate(120deg); }  /* blau */
+    66%  { filter: hue-rotate(240deg); }  /* rot */
+    100% { filter: hue-rotate(360deg); }
 }
 
 /* TOP ICONS */
